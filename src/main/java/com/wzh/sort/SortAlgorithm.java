@@ -1,7 +1,6 @@
 package com.wzh.sort;
 
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * @description: 排序算法
@@ -11,31 +10,128 @@ import java.util.Random;
 public class SortAlgorithm {
 
     public static void main(String[] args) {
-        int[] a1={9,3,5,1,2,6,7,4,8};
-        selectionSort(a1);
-        print(a1);
+//        int[] a1={9,3,5,1,2,6,7,4,8};
+//        selectionSort(a1);
+//        print(a1);
+//
+//        int[] a2={9,3,5,1,2,6,7,4,8};
+//        bubbleSort(a2);
+//        print(a2);
+//
+//        int[] a3={9,3,5,1,2,6,7,4,8};
+//        insertionSort(a3);
+//        print(a3);
+//
+//        int[] a4={9,6,11,3,5,12,8,7,10,15,14,4,1,13,2};
+//        shellSort(a4);
+//        print(a4);
+//
+//        int[] a5={1,4,7,8,3,6,9};
+//        mergeSort(a5,0,a5.length-1);
+//        print(a5);
+//
+//        int[] a6={1,4,6,9,10,2,3,5,8,7,6};
+//        quickSort(a6,0,a6.length-1);
+//        print(a6);
+//
+//        int[] a7={2,4,2,3,7,1,1,0,0,5,6,9,8,5,7,4,0,9};
+//        a7=countingSort(a7);
+//        print(a7);
+//        Arrays.sort(a7);
+//        System.out.println(Arrays.toString(a7));
 
-        int[] a2={9,3,5,1,2,6,7,4,8};
-        bubbleSort(a2);
-        print(a2);
-
-        int[] a3={9,3,5,1,2,6,7,4,8};
-        insertionSort(a3);
-        print(a3);
-
-        int[] a4={9,6,11,3,5,12,8,7,10,15,14,4,1,13,2};
-        shellSort(a4);
-        print(a4);
-
-        int[] a5={1,4,7,8,3,6,9};
-        mergeSort(a5,0,a5.length-1);
-        print(a5);
-        
-        int[] a6={1,4,6,9,10,2,3,5,8,7,6};
-        quickSort(a6,0,a6.length-1);
-        print(a6);
+        int[] a8={421,240,115,532,305,430,124};
+        a8=radixSort(a8);
+        print(a8);
     }
 
+    /**
+     * 基数排序，多关键字排序,桶思想的一种
+     * 稳定排序
+     * 平均时间复杂度 O(n*k)
+     * 最好时间复杂度 O(n*k)
+     * 最坏时间复杂度 O(n*k)
+     * 空间复杂度 O(n)
+     * @param a
+     */
+    public static int[] radixSort(int[] a){
+        int[] r=new int[a.length];
+        int[] count=new int[10];
+        int step=getArrayStep(a);
+        for(int i=0;i<step;i++){
+            int division= (int) Math.pow(10,i);
+            System.out.println(division);
+            for(int j=0;j<a.length;j++){
+                int num=a[j]/division%10;
+//                System.out.println(num);
+                count[num]++;
+            }
+            print(count);
+            for(int m=1;m<count.length;m++){
+                count[m]=count[m]+count[m-1];
+            }
+            print(count);
+            for(int k=a.length-1;k>=0;k--){
+                int num=a[k]/division%10;
+                r[--count[num]]=a[k];
+            }
+            System.arraycopy(r,0,a,0,a.length);
+            print(r);
+            Arrays.fill(count,0);
+        }
+        return r;
+    }
+
+    private static int getArrayStep(int[] a) {
+        int step=0;
+        for(int i:a){
+            if(i>step) step=i;
+        }
+        return (step+"").length();
+    }
+
+    /**
+     * 计数排序，非比较排序，取值0到9
+     * 适合量大，取值范围小,桶思想的一种
+     * 稳定排序
+     * 平均时间复杂度 O(N+k)
+     * 最好时间复杂度 O(N+k)
+     * 最坏时间复杂度 O(N+k)
+     * 空间复杂度 O(N+k)
+     */
+    public static int[] countingSort(int[] a){
+        int[] result=new int[a.length];
+        int[] count=new int[10];
+        // 计数数组，
+        // 代表原数组中每个数字出现的次数，
+        // 小标表示原数组值，
+        // 值代表原数组中数值出现次数
+        for(int i=0;i<a.length;i++){
+            count[a[i]]++;
+        }
+        print(count);
+        // 累加数组，使计数算法变为稳定排序
+        // 记录没一个下标值最后出现的位置
+        for(int i=1;i<count.length;i++){
+            count[i]=count[i]+count[i-1];
+        }
+        print(count);
+//        for(int i=0,j=0;i<count.length;i++){
+//            while (count[i]-- >0){
+//                result[j++]=i;
+//            }
+//        }
+
+        for(int i=a.length-1;i>=0;i--){
+//            System.out.println("------------");
+//            System.out.println("i="+i+",a[i]="+a[i]+",count[a[i]]="+count[a[i]]);
+            result[-- count[a[i]]]=a[i];
+//            System.out.println("i="+i+",a[i]="+a[i]+",count["+a[i]+"]="+count[a[i]]+",result["+count[a[i]]+"]="+a[i]);
+//            while (count[a[i]]>0){
+//            }
+        }
+        return result;
+    }
    
    
 
@@ -215,11 +311,15 @@ public class SortAlgorithm {
     }
 
     public static void print(int[] a) {
-        System.out.println();
-        for(int i:a){
-            System.out.print(i+" ");
+        StringBuilder s=new StringBuilder("[");
+        for(int i=0;i<a.length;i++){
+            s.append(a[i]);
+            if(i!=a.length-1){
+                s.append(", ");
+            }
         }
-        System.out.println();
+        s.append("]");
+        System.out.println(s);
     }
 
 }
