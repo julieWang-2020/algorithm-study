@@ -1,7 +1,8 @@
 package com.wzh.sort;
 
+import com.wzh.util.AlgorithmHelper;
+
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * @description:
@@ -25,7 +26,7 @@ public class SortAlgorithmCheck {
         if(type.equals(SortTypeEnum.SORT_TYPE_MERGE)) throw new RuntimeException("not support sort");
         boolean same=true;
         for(int times=0;times<1000;times++){
-            int[] a=generateRandomArray(10000);
+            int[] a=AlgorithmHelper.genFixedLengthRandomArray(10000);
             int[] copyA=sortCheck(type,a);
             Arrays.sort(a);
 
@@ -39,9 +40,9 @@ public class SortAlgorithmCheck {
     private void checkMerge() {
         boolean same=true;
         for(int times=0;times<1000;times++){
-            int[] a51=generateRandomArray(5000);
+            int[] a51= AlgorithmHelper.genFixedLengthRandomArray(5000);
             Arrays.sort(a51);
-            int[] a52=generateRandomArray(5000);
+            int[] a52=AlgorithmHelper.genFixedLengthRandomArray(5000);
             Arrays.sort(a52);
 
             int[] a=new int[10000];
@@ -86,14 +87,8 @@ public class SortAlgorithmCheck {
         return copyA;
     }
 
-    private int[] generateRandomArray(int len) {
-        Random r=new Random();
-        int[] a=new int[len];
-        for(int i=0;i<len;i++){
-            a[i]=r.nextInt();
-        }
-        return a;
-    }
+
+
 }
 
 enum SortTypeEnum{

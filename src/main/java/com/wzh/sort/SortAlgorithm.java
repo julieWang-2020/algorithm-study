@@ -10,35 +10,35 @@ import java.util.Arrays;
 public class SortAlgorithm {
 
     public static void main(String[] args) {
-//        int[] a1={9,3,5,1,2,6,7,4,8};
-//        selectionSort(a1);
-//        print(a1);
-//
-//        int[] a2={9,3,5,1,2,6,7,4,8};
-//        bubbleSort(a2);
-//        print(a2);
-//
-//        int[] a3={9,3,5,1,2,6,7,4,8};
-//        insertionSort(a3);
-//        print(a3);
-//
-//        int[] a4={9,6,11,3,5,12,8,7,10,15,14,4,1,13,2};
-//        shellSort(a4);
-//        print(a4);
-//
-//        int[] a5={1,4,7,8,3,6,9};
-//        mergeSort(a5,0,a5.length-1);
-//        print(a5);
-//
-//        int[] a6={1,4,6,9,10,2,3,5,8,7,6};
-//        quickSort(a6,0,a6.length-1);
-//        print(a6);
-//
-//        int[] a7={2,4,2,3,7,1,1,0,0,5,6,9,8,5,7,4,0,9};
-//        a7=countingSort(a7);
-//        print(a7);
-//        Arrays.sort(a7);
-//        System.out.println(Arrays.toString(a7));
+        int[] a1={9,3,5,1,2,6,7,4,8};
+        selectionSort(a1);
+        print(a1);
+
+        int[] a2={9,3,5,1,2,6,7,4,8};
+        bubbleSort(a2);
+        print(a2);
+
+        int[] a3={9,3,5,1,2,6,7,4,8};
+        insertionSort(a3);
+        print(a3);
+
+        int[] a4={9,6,11,3,5,12,8,7,10,15,14,4,1,13,2};
+        shellSort(a4);
+        print(a4);
+
+        int[] a5={1,4,7,8,3,6,9};
+        mergeSort(a5,0,a5.length-1);
+        print(a5);
+
+        int[] a6={1,4,6,9,10,2,3,5,8,7,6};
+        quickSort(a6,0,a6.length-1);
+        print(a6);
+
+        int[] a7={2,4,2,3,7,1,1,0,0,5,6,9,8,5,7,4,0,9};
+        a7=countingSort(a7);
+        print(a7);
+        Arrays.sort(a7);
+        System.out.println(Arrays.toString(a7));
 
         int[] a8={421,240,115,532,305,430,124};
         a8=radixSort(a8);
@@ -243,6 +243,8 @@ public class SortAlgorithm {
      * @param a
      */
     public static void insertionSort(int[] a) {
+        if(a==null || a.length<2) return;
+
         for(int i=1; i<a.length;i++){
             int j=i;
             int temp=a[j];
@@ -270,6 +272,8 @@ public class SortAlgorithm {
      * @param a
      */
     public static void bubbleSort(int[] a) {
+        if(a==null || a.length<2) return;
+
         for(int i=1;i<a.length;i++){
             boolean flag=true;
             for(int j=0;j<a.length-i;j++){
@@ -294,6 +298,8 @@ public class SortAlgorithm {
      * @param a 数组a
      */
     public static void selectionSort(int[] a) {
+        if(a==null || a.length<2) return;
+
         int min;
         for(int i=0;i<a.length;i++){
             min=i;
