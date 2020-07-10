@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- * @description:
+ * @description: 使用双链表实现栈和队列
  * @author: Wangzh
  * @create: 2020-07-09 16:58
  **/
